@@ -1,4 +1,4 @@
-﻿var url_dictionary = {
+var url_dictionary = {
         alpha: {
             'customerService': "http://alpha-cloud.toast.com/support/faq/",
             'dephase': 'alpha',
@@ -29,10 +29,10 @@ var gnbParams = {
     customerService: url_dictionary[version]['customerService'],
     supportLanguage: {
         languageHandler: 'clickLanguageHandler',
-		        support: [{name: '�쒓뎅��', code: 'ko_KR'}, 
+		        support: [{name: '한국어', code: 'ko_KR'}, 
 		                  {name: 'English', code: 'en_US'},
-		                  {name: '�ζ쑍沃�', code: 'ja_JP'},
-		                  {name: '訝�뻼', code: 'zh_CN'}]
+		                  {name: '日本語', code: 'ja_JP'},
+		                  {name: '中文', code: 'zh_CN'}]
     },
     locale: getUserLocale(),
     useMain: true,
@@ -68,6 +68,7 @@ function clickLanguageHandler(event) {
     }
     (event.preventDefault) ? event.preventDefault() : event.returnValue = false;
     var selectLocale = event.target.getAttribute('code');
+
     TCC.utils.cookies.set('userLocale', selectLocale);
     gnb.setLocale(selectLocale);
     footer.setLocale(selectLocale);
@@ -77,8 +78,8 @@ function clickLanguageHandler(event) {
     if(current_location[1] === currentLocale) {
         current_location[1] = selectLocaleCode;
     }
-    if(current_location[current_location.length-3] === currentLocale) {
-        current_location[current_location.length-3] = selectLocaleCode;
+    if(current_location[current_location.length-2] === currentLocale) {   // 원래 사이트는 -2 가 아니라 -3 입니다.
+        current_location[current_location.length-2] = selectLocaleCode;
     }
     window.location.href = current_location.join("/");
 }

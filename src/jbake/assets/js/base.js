@@ -1,6 +1,6 @@
-﻿(function() {
+(function() {
 	appendListToSubLinkNav();
-	
+	test();
 	$(".dropdown-submenu > a").click(function(){
 		  $(location).attr('href', $(this).next().children()[0].children[0].href);
 		  return false;
@@ -12,7 +12,7 @@
     }
 
 	$('#list-up').click(function() {
-	혻 $("#sub-link-list").slideToggle();
+	  $("#sub-link-list").slideToggle();
 	});
 	
 	/* Toggle the `clicky` class on the body when clicking links to let us
@@ -37,11 +37,25 @@
 			$(".container > div")[1].className = "col-md-9 content-container";
 		}
 	});
+	
+	function test(){
+		var topics = document.querySelectorAll("h2, h3");
+		for(var i=0; i<topics.length ;i++){		
+			if(i==0){
+				$('#remotenav > ul').append("<li class='main active'><a href='#"+i+"'>"+topics[0].innerHTML+"</a></li>");		
+
+			}else if(topics[i].tagName=="H2"){			
+				$('#remotenav > ul').append("<li class='main'><a href='#"+i+"'>"+topics[i].innerHTML+"</a></li>");
+			}else if(topics[i].tagName=="H3"){
+				$('#remotenav > ul').append("<li class=''><a href='#"+i+"'>"+topics[i].innerHTML+"</a></li>");
+			}
+		}
+	}
 
 	function appendListToSubLinkNav() {
 
         var $parent_menu = $('ul.dropdown-menu > li.active').parent().parent();
-
+		
         if(!$parent_menu.length) {
             $('#side_nav_right').remove();
         }
@@ -62,6 +76,8 @@
 		}
 	}
 })();
+
+
 
 /* Search */
 
